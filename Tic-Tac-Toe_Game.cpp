@@ -3,8 +3,6 @@
 #include <cstdlib> // for system("clear") or system("cls")
 using namespace std;
 
-// int arr[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
-
 const int BOARD_SIZE = 3;
 char arr[BOARD_SIZE][BOARD_SIZE] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
 
@@ -42,68 +40,41 @@ void functionOne() {
 
 void functionTwo() {
   int digit;
+  bool validInput = false;
 
-  if (currentPlayer == 'X') {
-    cout << u1 << " please enter(1-9): ";
-    cin >> digit;
-  }
-  if (currentPlayer == '0') {
-    cout << u2 << " please enter(1-9): ";
-    cin >> digit;
-  }
-  if (digit == 1) {
-    row = 0;
-    col = 0;
-  }
-  if (digit == 2) {
-    row = 0;
-    col = 1;
-  }
-  if (digit == 3) {
-    row = 0;
-    col = 2;
-  }
-  if (digit == 4) {
-    row = 1;
-    col = 0;
-  }
-  if (digit == 5) {
-    row = 1;
-    col = 1;
-  }
-  if (digit == 6) {
-    row = 1;
-    col = 2;
-  }
-  if (digit == 7) {
-    row = 2;
-    col = 0;
-  }
-  if (digit == 8) {
-    row = 2;
-    col = 1;
-  }
-  if (digit == 9) {
-    row = 2;
-    col = 2;
-  } else if (digit < 1 || digit > 9) {
-    cout << "Invalid 🤦‍♀️ "<<endl;
-  }
+    while(!validInput){
+        if(currentPlayer == 'X'){
+            cout<< u1 <<" please enter(1-9): ";
+         }
+          else{
+              cout<< u2 <<" please enter(1-9): ";
+          }
+           cin >> digit;
+           if(cin.fail() || digit < 1 || digit > 9){
+               cout<<"Invalid input. Please enter a number between 1 and 9." << endl;
+                cin.clear();
+                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+           } else{
+               validInput = true;
+           }
+    }
+  
+     row = (digit - 1) / BOARD_SIZE; 
+      // For row:digit - 1: In this case, 3 - 1 = 2.2 / BOARD_SIZE: Since BOARD_SIZE is 3, 2 / 3 is integer division, which results in 0.
+    // So, row will be assigned the value 0.For col:digit - 1: In this case, 3 - 1 = 2.2 % BOARD_SIZE: Since BOARD_SIZE is 3, 2 % 3 results in 2.So, col will be assigned the value 2.
 
-
-  if (currentPlayer == 'X' && arr[row][col] != 'X' && arr[row][col] != '0') {
-
-    arr[row][col] = 'X';
-    currentPlayer= '0';
-  } else if (currentPlayer == '0' && arr[row][col] != 'X' && arr[row][col] != '0') {
-    arr[row][col] = '0';
-    currentPlayer= 'X';
-  } else {
-    cout << "There is no empty space 🤷‍♂️ "<<endl;
-
-    functionTwo();
+    
+    col = (digit - 1) % BOARD_SIZE;
+  
+  
+     if (arr[row][col] != 'X' && arr[row][col] != '0') {
+        arr[row][col] = currentPlayer;
+        currentPlayer = (currentPlayer == 'X') ? '0' : 'X';
+    } else {
+        cout << "This space is already taken. Please choose another." << endl;
+        functionTwo();
   }
-  functionOne();
+ 
 }
 
 bool functionThree() {
