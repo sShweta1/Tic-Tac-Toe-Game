@@ -89,14 +89,7 @@ void functionTwo() {
   } else if (digit < 1 || digit > 9) {
     cout << "Invalid 🤦‍♀️ "<<endl;
   }
-  // cout << (currentPlayer == 'X' ? u1 : u2) << ", please enter your move (1-9): ";
-  // while (!(cin >> digit) || digit < 1 || digit > 9) {
-  //     cout << "Invalid input. Please enter a number between 1 and 9: ";
-  //     cin.clear();
-  //     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  // }
-  // row = (digit - 1) / BOARD_SIZE;
-  // col = (digit - 1) % BOARD_SIZE;
+
 
   if (currentPlayer == 'X' && arr[row][col] != 'X' && arr[row][col] != '0') {
 
