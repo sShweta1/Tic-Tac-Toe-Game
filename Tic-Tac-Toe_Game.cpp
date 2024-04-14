@@ -87,7 +87,7 @@ bool functionThree() {
       arr[0][2] == arr[1][1] && arr[0][2] == arr[2][0]) {
     return true;
   }
-tie = true
+tie = true;
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       if (arr[i][j] != 'X' && arr[i][j] != '0') {
